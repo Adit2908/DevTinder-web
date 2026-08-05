@@ -5,7 +5,7 @@ const UserCard = ({user}) => {
     const {firstName,lastName,photoUrl,age,gender,about}=user
     
   return (
-    <div className="card bg-base-100 w-96 shadow-sm">
+    <div className="card bg-base-00 w-96 shadow-sm">
       <figure>
         <img
        
@@ -15,7 +15,7 @@ const UserCard = ({user}) => {
       </figure>
       <div className="card-body">
         <h2 className="card-title">{firstName + " " + lastName}</h2>
-        {age && gender &&<p>{age + ", " + "gender"}</p>}
+        {age && gender &&<p>{age + ", " + gender}</p>}
         <p>
          {about}
         </p>

@@ -22,7 +22,11 @@
 - You should not be able to access other routes without login
 - If token is not present ,redireactuser to login page
 - logout Feature
-- build the userCard
+- Get the feed and add the feed in the store.
+- build the user card on feed.
+- Edit profile feature
+- Show Toast Message on save of Profile
+- See all my connections
 
 
 Body
