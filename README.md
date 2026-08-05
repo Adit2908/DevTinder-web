@@ -22,7 +22,7 @@
 - You should not be able to access other routes without login
 - If token is not present ,redireactuser to login page
 - logout Feature
-- profile
+- build the userCard
 
 
 Body

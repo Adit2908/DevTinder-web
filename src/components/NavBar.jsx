@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router";
 import { BASE_URL } from "../utils/constants";
@@ -8,7 +8,8 @@ import { removeUser } from "../utils/userSlice";
 const NavBar = () => {
   const user = useSelector((store) => store.user);
   const dispatch=useDispatch();
-  const navigate=useNavigate()
+  const navigate=useNavigate();
+  const[error,setError]=useState();
 
   const handleLogout=async()=>{
     try{
@@ -18,7 +19,7 @@ const NavBar = () => {
        
     }catch(err){
       //Error logic maybe redirect to error page
-      console.log(err)
+           setError(err?.response?.data || "Something went wrong")
     }
   }
 
