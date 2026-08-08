@@ -1,6 +1,7 @@
 import React from "react";
 
 const UserCard = ({user}) => {
+  console.log(user)
 
     const {firstName,lastName,photoUrl,age,gender,about}=user
     
@@ -9,7 +10,7 @@ const UserCard = ({user}) => {
       <figure>
         <img
        
-          src={user.photoUrl}
+          src={photoUrl}
           alt="Shoes"
         />
       </figure>
