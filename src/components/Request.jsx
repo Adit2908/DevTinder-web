@@ -8,7 +8,7 @@ const Request = () => {
   const requests = useSelector((store) => store.requests);
   const dispatch = useDispatch();
 
-  const[showButtons,setShowButtons]=useState(true)
+  const [showButtons, setShowButtons] = useState(true);
 
   const reviewRequest = async (status, _id) => {
     try {
@@ -17,7 +17,7 @@ const Request = () => {
         {},
         { withCredentials: true },
       );
-      dispatch(removeRequest(_id))
+      dispatch(removeRequest(_id));
     } catch (err) {}
   };
 
@@ -35,7 +35,8 @@ const Request = () => {
   }, []);
 
   if (!requests) return null;
-  if (requests.length === 0) return <h1 className="flex justify-center my-10">No Requests Found</h1>;
+  if (requests.length === 0)
+    return <h1 className="flex justify-center my-10">No Requests Found</h1>;
 
   return (
     <div className="text-center my-10">
@@ -47,14 +48,16 @@ const Request = () => {
         return (
           <div
             key={_id}
-            className="flex justify-between items-center m-4 p-4 rounded-lg bg-base-300 w-2/3 mx-auto"
+            className="flex justify-between items-center m-4 p-4 rounded-lg bg-base-300 w-full mx-auto"
           >
             <div>
-              <img
-                alt="photo"
-                className="w-20 h-20 rounded-full"
-                src={photoUrl}
-              />
+              <div className="w-28 h-28 flex-shrink-0 overflow-hidden rounded-full ring-2 ring-primary/30">
+                <img
+                  src={photoUrl}
+                  alt={`${firstName} ${lastName}`}
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
             </div>
             <div className="text-left mx-4">
               <h2 className="font-bold text-xl">
