@@ -49,7 +49,7 @@ Body
 - Signup on AWS 
 - Launch instance
 - chmod 400 <secret>.pem
-- ssh -i "devTinder-secret.pem" ubuntu@ec2-13-203-197-231.ap-south-1.compute.amazonaws.com
+- ssh -i "devTinder.pem" ubuntu@ec2-13-204-86-159.ap-south-1.compute.amazonaws.com
 - Install Node version v24.3.0
 - Git clone
 - Frontend
