@@ -43,3 +43,62 @@ Body
     Route/login => Login
     Route/connections=>Connections
     Route/profile =>Profile
+
+
+# Deployment
+- Signup on AWS 
+- Launch instance
+- chmod 400 <secret>.pem
+- ssh -i "devTinder-secret.pem" ubuntu@ec2-13-203-197-231.ap-south-1.compute.amazonaws.com
+- Install Node version v24.3.0
+- Git clone
+- Frontend
+    - npm install- dependencies install
+    - npm run build
+    - sudo apt update
+    - sudo apt install nginx
+    - sudo systemctl start nginx
+    - sudo systemctl enable nginx
+    - Copy code from dist(build files) to /var/www/html/ 
+    - sudo scp -r dist/* /var/www/html/
+    - Enable port :80 of your instance 
+- Backend
+    - updated DB password
+    - allowed ec2 instance public IP on mongodb server
+    - npm install pm2 -g
+    - pm2 start npm -- name "devTinder-backend" -- start
+    - pm2 logs
+    - pm2 list, flush <name>,pm2 stop <name>,pm2 delete <name>
+    - config nginx -/etc/nginx/sites-available/default
+
+    Frontend- http://13.203.197.231/
+    backend- http://13.203.197.231/:7777/
+
+    Domain name= devtinder.com => 13.203.197.231
+
+    Frontend= devtinder.com
+    Backend:devTinder.com:7777 => devTinder.com/api
+
+    nginx config:
+    server name 13.203.197.231;
+ 
+
+        location /api/ {
+            proxy_pass http://127.0.0.1:7777;
+
+            proxy_http_version 1.1;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+    }
+    
+
+    - restart nginx -  sudo systemctl restart nginx
+
+
+
+
+
+
+sudo nano /etc/nginx/sites-available/default
