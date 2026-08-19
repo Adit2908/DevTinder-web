@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "axiosInstance";
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,7 @@ const Connections = () => {
 
   const fetchConnections = async () => {
     try {
-      const res = await axios.get(BASE_URL + "/user/connections", {
+      const res = await axiosInstance.get(BASE_URL + "/user/connections", {
         withCredentials: true,
       });
 
