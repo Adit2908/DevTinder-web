@@ -26,7 +26,7 @@ const Login = () => {
         },
         { withCredentials: true },
       );
-      dispatch(addUser({ ...res.data.data, token: res.data.token }));
+      dispatch(addUser(res.data));
       return navigate("/");
     } catch (err) {
       setError(err?.response?.data || "Something went wrong");
