@@ -26,7 +26,7 @@ const Login = () => {
         },
         { withCredentials: true },
       );
-      dispatch(addUser(res.data));
+      dispatch(addUser({ ...res.data.data, token: res.data.token }));
       return navigate("/");
     } catch (err) {
       setError(err?.response?.data || "Something went wrong");
@@ -38,7 +38,7 @@ const Login = () => {
     try{
       const res=await axiosInstance.post(BASE_URL + "/signup", {firstName,lastName,emailId,password}, {withCredentials:true});
       console.log(res.data)
-      dispatch(addUser(res.data.data));
+      dispatch(addUser({ ...res.data.data, token: res.data.token }));
       return navigate("/profile");
       
     }catch(err){

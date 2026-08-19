@@ -2,9 +2,10 @@ import React from "react";
 import { useState } from "react";
 import UserCard from "./UserCard";
 import { BASE_URL } from "../utils/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch ,useSelector} from "react-redux";
 import { addUser } from "../utils/userSlice";
 import axiosInstance from "../utils/axiosInstance";
+
 
 const EditProfile = ({ user }) => {
   const [firstName, setFirstName] = useState(user.firstName);
@@ -16,6 +17,8 @@ const EditProfile = ({ user }) => {
   const [error, setError] = useState("");
   const [showToast, setShowToast] = useState(false);
   const dispatch = useDispatch();
+
+  const loggedInUser = useSelector((store) => store.user); 
 
   const saveProfile = async () => {
     setError("");
@@ -33,7 +36,7 @@ const EditProfile = ({ user }) => {
 
         { withCredentials: true },
       );
-      dispatch(addUser(res?.data?.data));
+      dispatch(addUser({ ...res?.data?.data, token: loggedInUser.token }));
       setShowToast(true);
       setTimeout(() => {
         setShowToast(false);
