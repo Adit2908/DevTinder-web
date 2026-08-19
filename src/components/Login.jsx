@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import axiosInstance from "axiosInstance";
+import axiosInstance from "../utils/axiosInstance";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router";

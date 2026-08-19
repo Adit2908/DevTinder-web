@@ -1,4 +1,4 @@
-import axiosInstance from "axiosInstance";
+import axiosInstance from "../utils/axiosInstance";
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
