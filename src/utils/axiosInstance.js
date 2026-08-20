@@ -1,17 +1,11 @@
 import axios from "axios";
 import { BASE_URL } from "./constants";
-import appStore from "./appStore";
 
+// Backend uses cookie-based auth (req.cookies.token),
+// so we use withCredentials to send cookies on every request.
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
-});
-
-axiosInstance.interceptors.request.use((config) => {
-  const token = appStore.getState().user?.token;
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
+  withCredentials: true,
 });
 
 export default axiosInstance;
