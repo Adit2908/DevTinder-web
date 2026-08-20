@@ -4,7 +4,7 @@ import UserCard from "./UserCard";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch ,useSelector} from "react-redux";
 import { addUser } from "../utils/userSlice";
-import axiosInstance from "../utils/axiosInstance";
+import axios from "axios"
 
 
 const EditProfile = ({ user }) => {
@@ -23,7 +23,7 @@ const EditProfile = ({ user }) => {
   const saveProfile = async () => {
     setError("");
     try {
-      const res = await axiosInstance.patch(
+      const res = await axios.patch(
         BASE_URL + "/profile/edit",
         {
           firstName,
@@ -36,7 +36,7 @@ const EditProfile = ({ user }) => {
 
         { withCredentials: true },
       );
-      dispatch(addUser(res.data));
+      dispatch(addUser(res.data.data));
       setShowToast(true);
       setTimeout(() => {
         setShowToast(false);
