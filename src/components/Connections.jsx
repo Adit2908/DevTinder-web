@@ -1,15 +1,12 @@
-import axios from "axios";
+import axios from "axios"
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/connectionSlice";
-import { removeUser } from "../utils/userSlice";
-import { useNavigate } from "react-router";
 
 const Connections = () => {
   const connections = useSelector((store) => store.connections);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [error, setError] = useState("");
 
   const fetchConnections = async () => {
@@ -17,13 +14,9 @@ const Connections = () => {
       const res = await axios.get(BASE_URL + "/user/connections", {
         withCredentials: true,
       });
+
       dispatch(addConnections(res.data.data));
     } catch (err) {
-      if (err?.response?.status === 401) {
-        dispatch(removeUser());
-        navigate("/login");
-        return;
-      }
       setError(err?.response?.data || "Something went wrong");
     }
   };
@@ -61,6 +54,7 @@ const Connections = () => {
               {age && gender && <p>{age + ", " + gender}</p>}
               <p>{about}</p>
             </div>
+           
           </div>
         );
       })}
