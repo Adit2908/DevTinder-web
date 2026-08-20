@@ -1,24 +1,30 @@
-import axios from "axios"
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addRequests, removeRequest } from "../utils/requestSlice";
+import { removeUser } from "../utils/userSlice";
+import { useNavigate } from "react-router";
 
 const Request = () => {
   const requests = useSelector((store) => store.requests);
   const dispatch = useDispatch();
-
-  const [showButtons, setShowButtons] = useState(true);
+  const navigate = useNavigate();
 
   const reviewRequest = async (status, _id) => {
     try {
-      const res = await axios.post(
+      await axios.post(
         BASE_URL + "/request/review/" + status + "/" + _id,
         {},
         { withCredentials: true },
       );
       dispatch(removeRequest(_id));
-    } catch (err) {}
+    } catch (err) {
+      if (err?.response?.status === 401) {
+        dispatch(removeUser());
+        navigate("/login");
+      }
+    }
   };
 
   const fetchRequests = async () => {
@@ -27,7 +33,12 @@ const Request = () => {
         withCredentials: true,
       });
       dispatch(addRequests(res.data.data));
-    } catch (err) {}
+    } catch (err) {
+      if (err?.response?.status === 401) {
+        dispatch(removeUser());
+        navigate("/login");
+      }
+    }
   };
 
   useEffect(() => {
@@ -86,4 +97,5 @@ const Request = () => {
     </div>
   );
 };
+
 export default Request;
