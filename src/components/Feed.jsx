@@ -53,7 +53,7 @@ const Feed = () => {
     try {
       const res = await axios.get(BASE_URL + "/feed", {
         headers: { Authorization: `Bearer ${user?.token}` },
-      });
+      },{withCredentials:true});
       dispatch(addFeed(res.data));
     } catch (err) {
       console.error(err);
