@@ -38,7 +38,7 @@ const Login = () => {
     try{
       const res=await axios.post(BASE_URL + "/signup", {firstName,lastName,emailId,password}, {withCredentials:true});
       console.log(res.data)
-      dispatch(addUser({ ...res.data.data, token: res.data.token }));
+      dispatch(addUser(res.data.data));
       return navigate("/profile");
       
     }catch(err){
