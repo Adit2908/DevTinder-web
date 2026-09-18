@@ -51,7 +51,7 @@ const Request = () => {
             className="flex justify-between items-center m-4 p-4 rounded-lg bg-base-300 w-full mx-auto"
           >
             <div>
-              <div className="w-28 h-28 flex-shrink-0 overflow-hidden rounded-full ring-2 ring-primary/30">
+              <div className="w-28 h-28 shrink-0 overflow-hidden rounded-full ring-2 ring-primary/30">
                 <img
                   src={photoUrl}
                   alt={`${firstName} ${lastName}`}
