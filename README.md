@@ -49,7 +49,7 @@ Body
 - Signup on AWS 
 - Launch instance
 - chmod 400 <secret>.pem
-- ssh -i "devTinder.pem" ubuntu@ec2-13-204-86-159.ap-south-1.compute.amazonaws.com
+- ssh -i "devTinder-secret-key.pem" ubuntu@ec2-35-154-79-201.ap-south-1.compute.amazonaws.com
 - Install Node version v24.3.0
 - Git clone
 - Frontend
@@ -59,33 +59,36 @@ Body
     - sudo apt install nginx
     - sudo systemctl start nginx
     - sudo systemctl enable nginx
-    - Copy code from dist(build files) to /var/www/html/ 
+    - Copy code from dist(build files) to cd /var/www/html/ 
     - sudo scp -r dist/* /var/www/html/
     - Enable port :80 of your instance 
 - Backend
+    - npm install
     - updated DB password
+    - update on local to update on remote - git log -git pull - git log
     - allowed ec2 instance public IP on mongodb server
     - npm install pm2 -g
-    - pm2 start npm -- name "devTinder-backend" -- start
+    - pm2 start npm "devtinder-backend" -- start
     - pm2 logs
-    - pm2 list, flush <name>,pm2 stop <name>,pm2 delete <name>
+    - pm2 list, flush <name>,pm2 stop npm <name>,pm2 delete <name>
     - config nginx -/etc/nginx/sites-available/default
 
-    Frontend- http://13.203.197.231/
-    backend- http://13.203.197.231/:7777/
+    Frontend- http://35.154.79.201/
+    backend- http://35.154.79.201:7777/
 
     Domain name= devtinder.com => 13.203.197.231
 
     Frontend= devtinder.com
     Backend:devTinder.com:7777 => devTinder.com/api
+-    in ubuntu - run sudo nano /etc/nginx/sites-available/default
+
 
     nginx config:
-    server name 13.203.197.231;
+    server name 35.154.79.201;
  
 
         location /api/ {
-            proxy_pass http://127.0.0.1:7777;
-
+            proxy_pass http://localhost:7777/;
             proxy_http_version 1.1;
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
@@ -95,7 +98,7 @@ Body
     
 
     - restart nginx -  sudo systemctl restart nginx
-
+    - modify the baseurl in frontend project to "/api"
 
 
 
